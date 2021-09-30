@@ -1,0 +1,8 @@
+ENVIRONMENT: ${opt:stage}
+STAGE: test
+TENANT: tdbank
+LOG_LEVEL: INFO
+SENTRY_ENVIRONMENT: singletenant-test
+SENTRY_DSN: None
+SERVICE_DOMAIN: ${opt:region}.services.io.singletenant-test.lifeworks.com
+DEPLOYMENT_BUCKET: ${opt:region}.packages.io.${opt:stage}.lifeworks.com

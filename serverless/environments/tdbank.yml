@@ -1,0 +1,8 @@
+ENVIRONMENT: ${opt:stage}
+STAGE: live
+TENANT: tdbank
+LOG_LEVEL: ERROR
+SENTRY_ENVIRONMENT: tdbank
+SENTRY_DSN: None
+SERVICE_DOMAIN: services.io.tdbank.lifeworks.com
+DEPLOYMENT_BUCKET: ${opt:region}.packages.io.${opt:stage}.lifeworks.com

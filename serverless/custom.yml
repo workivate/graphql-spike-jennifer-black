@@ -1,0 +1,56 @@
+tenant: ${self:provider.environment.TENANT}
+environment: ${self:provider.environment.ENVIRONMENT}
+awsXrayContextMissing: ${self:provider.environment.LOG_LEVEL}
+log_level: ${self:provider.environment.LOG_LEVEL}
+variables: ${file(./serverless/variables/${opt:stage, 'integration'}.yml)}
+
+customDomain:
+  domainName: ${self:provider.environment.SERVICE_DOMAIN}
+  basePath: ${self:service}
+  stage: ${opt:stage}
+  createRoute53Record: false
+
+serverless-aws-resource-names:
+  source: mapping.json
+  variables:
+    functionPrefix: graphql-spike-jennifer-black
+
+vpc:
+  vpcName: "Lifeworks TerraformNetwork"
+  subnetNames:
+    - "lambda-private"
+    - "lambda-private"
+  securityGroupNames:
+    - "allow-https-access"
+    - "with-https-access"
+    - "role-lambda-function"
+
+pythonRequirements:
+  dockerizePip: false
+  pipCmdExtraArgs:
+    - --extra-index-url
+    - https://pypi.fury.io/${env:GEMFURY_TOKEN}/lifeworks/
+  noDeploy:
+    - awscli
+    - boto3
+    - botocore
+    - pytest
+    - black
+    - mypy
+    - flake8
+    - pytest-cov
+    - gunicorn
+    - isort
+    - pre-commit
+    - moto
+  useStaticCache: false
+  useDownloadCache: false
+
+kmsGrants:
+  kmsKeyId: "alias/parameter-store-key"
+  lambdaRoleName: ${self:service}-${opt:region}-lambda-role
+
+prune:
+  automatic: true
+  includeLayers: true
+  number: 3

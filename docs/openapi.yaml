@@ -1,0 +1,32 @@
+openapi: 3.0.3
+
+servers:
+  - url: https://services.io.integration.lifeworks.com/graphql-spike-jennifer-black
+    description: Integration
+  - url: https://services.io.test.lifeworks.com/graphql-spike-jennifer-black
+    description: Test
+  - url: https://services.io.lifeworks.com/graphql-spike-jennifer-black
+    description: Live
+
+info:
+  description: Proof of concept for graphql in cashback microservice
+  version: "1.0.0"
+  title: graphql-spike-jennifer-black
+
+paths:
+  /status:
+    get:
+      summary: Health check endpoint
+      responses:
+        '200':
+          description: Returns healthcheck details for the API
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  server_time:
+                    type: string
+                    format: date-time
+                  status:
+                    type: string

@@ -1,0 +1,8 @@
+ENVIRONMENT: ${opt:stage}
+STAGE: integration
+TENANT: multi-tenant
+LOG_LEVEL: DEBUG
+SENTRY_ENVIRONMENT: integration
+SENTRY_DSN: None
+SERVICE_DOMAIN: ${opt:region}.services.io.${opt:stage}.lifeworks.com
+DEPLOYMENT_BUCKET: ${opt:region}.packages.io.${opt:stage}.lifeworks.com

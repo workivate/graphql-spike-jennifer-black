@@ -1,0 +1,2 @@
+serviceDomain: services.io.test.lifeworks.com
+deploymentBucket: ${opt:region}.packages.io.${opt:stage}.lifeworks.com

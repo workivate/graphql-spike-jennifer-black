@@ -1,0 +1,8 @@
+status:
+  description: Check application's health status
+  module: graphql_spike_jennifer_black/status
+  handler: graphql_spike_jennifer_black.status.controllers.get_status
+  events:
+    - http:
+        path: /status
+        method: get

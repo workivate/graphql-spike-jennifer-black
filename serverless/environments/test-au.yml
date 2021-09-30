@@ -1,0 +1,8 @@
+ENVIRONMENT: ${opt:stage}
+STAGE: test
+TENANT: multi-tenant
+LOG_LEVEL: INFO
+SENTRY_ENVIRONMENT: test-au
+SENTRY_DSN: None
+SERVICE_DOMAIN: ${opt:region}.services.io.${opt:stage}.lifeworks.com
+DEPLOYMENT_BUCKET: ${opt:region}.packages.io.${opt:stage}.lifeworks.com

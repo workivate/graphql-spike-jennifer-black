@@ -1,0 +1,54 @@
+service: graphql-spike-jennifer-black
+
+package:
+  excludeDevDependencies: false
+  exclude:
+    - "./**/**"
+  include:
+    - graphql_spike_jennifer_black/**
+
+provider:
+  name: aws
+  runtime: python3.8
+  apiName: ${self:service}
+  stage: ${self:custom.environment}
+  timeout: 10
+  stackName: "${self:service}"
+  deploymentBucket:
+    name: ${self:custom.variables.deploymentBucket}
+  tracing:
+    lambda: true
+    apiGateway: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ssm:GetParametersByPath
+      Resource:
+        - "arn:aws:ssm:#{AWS::Region}:#{AWS::AccountId}:parameter/service/${self:service}"
+    - Effect: Allow
+      Action:
+        - ec2:CreateNetworkInterface
+        - ec2:DescribeNetworkInterfaces
+        - ec2:DeleteNetworkInterface
+      Resource: "*"
+    - Effect: 'Allow'
+      Action:
+        - 'lambda:InvokeFunction'
+      Resource:
+        - arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:${self:custom.serverless-aws-resource-names.variables.functionPrefix}_*
+  environment: ${file(./serverless/environments/${opt:stage, 'integration'}.yml)}
+  tags:
+    service: ${self:service}
+
+plugins:
+  - serverless-aws-resource-names
+  - serverless-python-requirements
+  - serverless-pseudo-parameters
+  - serverless-kms-grants
+  - serverless-vpc-discovery
+  - serverless-domain-manager
+  - serverless-prune-plugin
+
+custom: ${file(./serverless/custom.template.yml)}
+
+functions: ${file(./serverless/functions.template.yml)}
