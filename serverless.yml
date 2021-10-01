@@ -46,9 +46,25 @@ plugins:
   - serverless-pseudo-parameters
   - serverless-kms-grants
   - serverless-vpc-discovery
-  - serverless-domain-manager
   - serverless-prune-plugin
 
-custom: ${file(./serverless/custom.template.yml)}
+custom: ${file(./serverless/custom.yml)}
 
-functions: ${file(./serverless/functions.template.yml)}
+functions:
+  status:
+    description: Check application's health status
+    module: graphql_spike_jennifer_black/status
+    handler: graphql_spike_jennifer_black.status.controllers.get_status
+    events:
+      - http:
+          path: /status
+          method: get
+
+  graphql_search:
+    description: endpoint for accessing search API via query
+    module: graphql_spike_jennifer_black/graphql
+    handler: graphql_spike_jennifer_black.graphql.controllers.get_search
+    events:
+      - http:
+          path: /graphql
+          method: post

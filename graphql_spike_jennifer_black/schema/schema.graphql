@@ -1,0 +1,14 @@
+type SearchResult {
+    success: Boolean
+    results: [String]
+}
+
+type Query {
+    searchResult: SearchResult
+    limit: Int
+    cursor: String
+}
+
+schema {
+    query: Query
+}

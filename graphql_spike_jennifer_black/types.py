@@ -2,7 +2,6 @@
 
 from typing import Any, Dict
 
-from aws_lambda_context import LambdaContext
 from mypy_boto3_dynamodb import ServiceResource
 from mypy_boto3_s3.client import S3Client
 from mypy_boto3_s3.service_resource import S3ServiceResource
