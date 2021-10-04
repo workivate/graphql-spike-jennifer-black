@@ -28,6 +28,7 @@ mypy-boto3-dynamodb = "^1.17.14"
 mypy-boto3-s3 = "^1.17.14"
 ariadne = "^0.13.0"
 kink = "^0.6.1"
+requests = "^2.26.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.5"
