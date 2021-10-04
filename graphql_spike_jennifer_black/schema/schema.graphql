@@ -1,12 +1,10 @@
 type SearchResult {
     success: Boolean
-    results: [String]
+    results: String
 }
 
 type Query {
-    searchResult: SearchResult
-    limit: Int
-    cursor: String
+    searchResult(query: String!, limit: Int, cursor: String): SearchResult
 }
 
 schema {

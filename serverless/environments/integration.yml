@@ -4,3 +4,4 @@ TENANT: multi-tenant
 LOG_LEVEL: DEBUG
 SENTRY_ENVIRONMENT: integration
 SENTRY_DSN: None
+SEARCH_API_URL: https://hxaxuq031j.execute-api.eu-west-1.amazonaws.com/integration/
